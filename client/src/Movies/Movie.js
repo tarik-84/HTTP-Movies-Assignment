@@ -34,6 +34,7 @@ function Movie (props) {
       .delete(`http://localhost:5000/api/movies/${params.id}`)
       .then(res => {
         console.log('mm', res);
+        props.setReset(true)
         history.push('/');
       })
       .catch(err => console.log(err))
@@ -47,7 +48,7 @@ function Movie (props) {
       <button className="save-button" onClick={saveMovie}>
         Save
       </button>
-      <button className="edit-button" onClick={() => history.push(`/update-movie/${match.params.id}`)} >
+      <button className="edit-button" onClick={() => history.push(`/update-movie/${params.id}`)} >
         Edit
       </button>
       <button className="delete-button" onClick={deleteMovie}>

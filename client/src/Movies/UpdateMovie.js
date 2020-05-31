@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import {TextField, Button} from '@material-ui/core';
+
+
+
 const initialItem = {
   id: "",
   title: "",
@@ -11,6 +15,7 @@ const initialItem = {
 const UpdateMovie = props => {
   const [item, setItem] = useState(initialItem);
   const { id } = useParams();
+  console.log('tar', item)
   
   useEffect(() => {
     const movieToUpdate = props.movieList.find(items => `${items.id}` === id);
@@ -37,10 +42,9 @@ const UpdateMovie = props => {
     axios
       .put(`http://localhost:5000/api/movies/${id}`, item)
       .then(res => {
-        console.log('qq', res.data);
-        // props.setMovieList([res.data]);
-        props.history.push(`/`);
-        window.location.reload();
+        console.log('qq', res);
+        props.setEdit(true);
+        props.history.push('/');
       })
       .catch(err => console.log("error!!", err));   
   };
@@ -48,9 +52,8 @@ const UpdateMovie = props => {
   return (
     <div className="update-movie">
       <h2>Update The Movie</h2>
-
       <form onSubmit={handleSubmit}>
-        <input
+        <TextField
           type="text"
           name="title"
           placeholder="Title"
@@ -58,7 +61,7 @@ const UpdateMovie = props => {
           value={item.title}
         />
         <div className="split" />
-        <input
+        <TextField
           type="text"
           name="director"
           placeholder="Director"
@@ -66,7 +69,7 @@ const UpdateMovie = props => {
           value={item.director}
         />
         <div className="split" />
-        <input
+        <TextField
           type="number"
           name="metascore"
           placeholder="Metascore Rating"
@@ -74,7 +77,7 @@ const UpdateMovie = props => {
           value={item.metascore}
         />
         <div className="split" />
-        <input
+        <TextField
           type="text"
           name="stars"
           placeholder="Stars"
@@ -82,8 +85,7 @@ const UpdateMovie = props => {
           value={item.stars}
         />
         <div className="split" />
-
-        <button>Update The Movie</button>
+        <Button variant="contained" color="primary" type="submit">Update</Button>
       </form>
     </div>
   );

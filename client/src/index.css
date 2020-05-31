@@ -83,11 +83,28 @@ body {
 }
 
 .home-button {
+  display: flex;
   padding: 5px 10px;
   background-color: lightskyblue;
+}
+
+.home {
+  margin-right: 15px;
 }
 
 .movie-warning {
   color: red;
   text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.add-movie, .update-movie {
+  text-align: center;
+}
+
+.split, .baseline {
+  margin: 15px;
 }
